@@ -1,4 +1,14 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
 vim.opt.rtp:prepend(lazypath)
 
 return require('lazy').setup( {
@@ -25,6 +35,7 @@ return require('lazy').setup( {
 
 	{'nvim-treesitter/nvim-treesitter',         -- tree-sitter for good highlighting
 		lazy = false,
+		-- event="VeryLazy",
 		config = function()
 			require('nvim-treesitter.configs').setup(treesitter_opts)
 			require'nvim-treesitter.parsers'.get_parser_configs().asm6502 = {
@@ -42,25 +53,6 @@ return require('lazy').setup( {
 		keys = {{"<c-p>", "<cmd>TSPlaygroundToggle<CR>"}},
 	},
 	{'nvim-treesitter/nvim-treesitter-textobjects', event = "VeryLazy"},
-	{'nvim-treesitter/nvim-treesitter-refactor', event = "VeryLazy"},
-
-	{'folke/twilight.nvim', cmd = "Twilight",
-		opts = {
-			dimming = {
-				inactive = true, -- when true, other windows will be fully dimmed
-			},
-			context = 20, -- amount of lines we will try to show around the current line
-			expand = {
-				"function",
-				"method",
-				"table",
-				"if_statement",
-			},
-		},
-	},
-	{'fladson/vim-kitty', lazy=false},
-	-- {}
-
 
 	--NOTE: file navigating
 	{'nvim-telescope/telescope.nvim',         -- fuzzy finding

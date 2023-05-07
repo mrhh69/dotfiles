@@ -94,6 +94,7 @@ onedark_opts = {
 }
 
 treesitter_opts = {
+	ensure_installed = {'c', 'lua', 'vim', 'vimdoc', 'javascript', 'html', 'css', 'comment', 'markdown', 'markdown_inline', 'json', 'make', 'bash'},
 	highlight = {
 		enable = true,
 		additional_vim_regex_highlighting = false,
