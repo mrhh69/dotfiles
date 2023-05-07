@@ -1,10 +1,11 @@
 
 vim.opt.number=true             -- show linenumbers
+vim.opt.relativenumber = true   -- relative by default (no flickering)
 vim.opt.tabstop=4               --number of columns occupied by a tab
 vim.opt.shiftwidth=4            --width for autoindents
 vim.opt.number=true             --add line numbers
 vim.opt.mouse=''                --disable mouse click
-vim.opt.clipboard='unnamedplus' --using system clipboard
+-- vim.opt.clipboard='unnamedplus' --using system clipboard
 vim.opt.cursorline=true         --highlight current cursorline
 vim.opt.ttyfast=true            --Speed up scrolling in Vim
 vim.opt.updatetime=100
@@ -28,12 +29,6 @@ vim.g.netrw_banner = 0
 vim.g.loaded_matchit = 1
 -- vim.g.loaded_matchparen = 1
 vim.g.loaded_2html_plugin = 1
-
-vim.filetype.add({
-	pattern = {
-		['.*%.[sS]'] = 'asm6502',
-	}
-})
 
 
 vim.g.mapleader = "\'"
@@ -94,6 +89,7 @@ onedark_opts = {
 }
 
 treesitter_opts = {
+	ensure_installed = {'c', 'lua', 'vim', 'vimdoc', 'javascript', 'html', 'css', 'comment', 'markdown', 'markdown_inline', 'json', 'make', 'bash'},
 	highlight = {
 		enable = true,
 		additional_vim_regex_highlighting = false,
@@ -131,13 +127,6 @@ lualine_opts = {
 		lualine_b = {
 			'branch', 'diff', 'diagnostics',
 			-- {require('auto-session-library').current_session_name},
-			{
-				function()
-					local key = require("grapple").key()
-					return " [" .. key .. "]"
-				end,
-				cond = function() return require("grapple").exists() end,
-			},
 		},
 		lualine_c = {'filename'},
 
