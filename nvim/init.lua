@@ -1,5 +1,6 @@
 
 vim.opt.number=true             -- show linenumbers
+vim.opt.relativenumber = true   -- relative by default (no flickering)
 vim.opt.tabstop=4               --number of columns occupied by a tab
 vim.opt.shiftwidth=4            --width for autoindents
 vim.opt.number=true             --add line numbers
@@ -23,11 +24,6 @@ vim.opt.smartcase = true
 -- netrw (builtin file explorer)
 vim.g.netrw_liststyle = 3   -- tree-like display
 vim.g.netrw_banner = 0
--- disable default plugins:
--- vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_matchit = 1
--- vim.g.loaded_matchparen = 1
-vim.g.loaded_2html_plugin = 1
 
 vim.filetype.add({
 	pattern = {

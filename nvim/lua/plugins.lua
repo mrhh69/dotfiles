@@ -153,7 +153,8 @@ return require('lazy').setup( {
 	--NOTE: editor nice looking stuff
 	'nvim-treesitter/nvim-treesitter-context', -- show cur function top line
 	{'lukas-reineke/indent-blankline.nvim',     -- indent guide
-		lazy = false,
+		-- lazy = false,
+		event="VeryLazy",
 		config = function() require("indent_blankline").setup() end,
 	},
 	{'karb94/neoscroll.nvim',                   -- better scrolling
@@ -207,4 +208,21 @@ return require('lazy').setup( {
 	},
 }, {
 	defaults = {lazy = true},
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"gzip",
+				"matchit",
+				-- "matchparen",
+				"netrwPlugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+				"editorconfig",
+				"rplugin",
+				"shada",
+			}
+		}
+	},
 })
