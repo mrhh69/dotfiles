@@ -24,8 +24,8 @@ return require('lazy').setup( {
 	},
 
 	{'nvim-treesitter/nvim-treesitter',         -- tree-sitter for good highlighting
-		lazy = false,
-		-- event="VeryLazy",
+		-- lazy = false,
+		event="VeryLazy",
 		config = function()
 			require('nvim-treesitter.configs').setup(treesitter_opts)
 			require'nvim-treesitter.parsers'.get_parser_configs().asm6502 = {
@@ -132,7 +132,8 @@ return require('lazy').setup( {
 	--NOTE: editor nice looking stuff
 	'nvim-treesitter/nvim-treesitter-context', -- show cur function top line
 	{'lukas-reineke/indent-blankline.nvim',     -- indent guide
-		lazy = false,
+		-- lazy = false,
+		event="VeryLazy",
 		config = function() require("indent_blankline").setup() end,
 	},
 	{'karb94/neoscroll.nvim',                   -- better scrolling
@@ -183,4 +184,21 @@ return require('lazy').setup( {
 	{'alec-gibson/nvim-tetris', cmd="Tetris"},
 }, {
 	defaults = {lazy = true},
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"gzip",
+				"matchit",
+				-- "matchparen",
+				"netrwPlugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+				"editorconfig",
+				"rplugin",
+				"shada",
+			}
+		}
+	},
 })
