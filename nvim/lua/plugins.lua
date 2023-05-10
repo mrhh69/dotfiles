@@ -53,6 +53,7 @@ return require('lazy').setup( {
 		keys = {{"<c-p>", "<cmd>TSPlaygroundToggle<CR>"}},
 	},
 	{'nvim-treesitter/nvim-treesitter-textobjects', event = "VeryLazy"},
+	{'fladson/vim-kitty', lazy=false},
 
 	--NOTE: file navigating
 	{'nvim-telescope/telescope.nvim',         -- fuzzy finding
@@ -140,6 +141,13 @@ return require('lazy').setup( {
 	{'abecodes/tabout.nvim', event="VeryLazy",
 		config = function() require('tabout').setup(tabout_opts) end,
 	},
+	{'max397574/better-escape.nvim', event="VeryLazy",
+		config = function() require("better_escape").setup {
+			mapping = {'jk', 'kj'},
+			keys = "<Esc>",
+		}
+		end,
+	},
 
 
 	--NOTE: editor nice looking stuff
@@ -194,6 +202,9 @@ return require('lazy').setup( {
 		end
 	},
 	{'alec-gibson/nvim-tetris', cmd="Tetris"},
+	{'jim-fx/sudoku.nvim', cmd = "Sudoku",
+		config = function() require("sudoku").setup{} end,
+	},
 }, {
 	defaults = {lazy = true},
 })
