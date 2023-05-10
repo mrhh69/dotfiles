@@ -1,6 +1,7 @@
 
 vim.opt.number=true             -- show linenumbers
 vim.opt.relativenumber = true   -- relative by default (no flickering)
+vim.opt.showmode = false		-- do not show default statusline (insert/visual)
 vim.opt.tabstop=4               --number of columns occupied by a tab
 vim.opt.shiftwidth=4            --width for autoindents
 vim.opt.number=true             --add line numbers

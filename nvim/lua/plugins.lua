@@ -202,9 +202,22 @@ return require('lazy').setup( {
 			vim.g.editorconfig = false -- disable editorconfig (default tab-setter)
 		end
 	},
-	{'alec-gibson/nvim-tetris', cmd="Tetris"},
-	{'jim-fx/sudoku.nvim', cmd = "Sudoku",
+	{'alec-gibson/nvim-tetris', --cmd="Tetris"
+		keys = {{'<leader>Gt', '<cmd>Tetris<CR>'}},
+	},
+	{'jim-fx/sudoku.nvim', --cmd = "Sudoku",
+		keys = {{'<leader>Gu', '<cmd>Sudoku<CR>'}},
 		config = function() require("sudoku").setup{} end,
+	},
+	{'seandewar/nvimesweeper', --cmd="Nvimesweeper",
+		keys = {{'<leader>Gn', '<cmd>Nvimesweeper<CR>'}},
+	},
+	{'rktjmp/shenzhen-solitaire.nvim', --cmd="ShenzhenSolitaireNewGame",
+		keys = {{'<leader>Gs', function() require('shenzhen-solitaire')["start-next-game"](0, {cursor={show=true}, keys={['next-location']='j', ['prev-location']='k'}}) end}},
+		config = function() vim.opt.mouse = 'n' end,
+	},
+	{'ThePrimeagen/vim-be-good', --cmd='VimBeGood',
+		keys = {{'<leader>Gv', '<cmd>VimBeGood<CR>'}},
 	},
 }, {
 	defaults = {lazy = true},
@@ -214,7 +227,7 @@ return require('lazy').setup( {
 				"gzip",
 				"matchit",
 				-- "matchparen",
-				"netrwPlugin",
+				-- "netrwPlugin",
 				"tarPlugin",
 				"tohtml",
 				"tutor",
