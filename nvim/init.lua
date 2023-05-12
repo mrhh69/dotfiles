@@ -16,11 +16,14 @@ vim.opt.termguicolors = true    -- no more cterm :(
 vim.opt.foldlevel = 99          -- don't fold on startup
 vim.opt.scrolloff = 5           -- always show 5 lines above/below
 vim.opt.swapfile = false        -- no swapfile (annoying "other instance of vim" errors)
+vim.opt.undofile = true   		-- allow for persistent undo
 vim.opt.virtualedit = "onemore" -- cursor past one character end of line
 vim.opt.ignorecase = true       -- better case ignoring
 vim.opt.smartcase = true
 -- vim.opt.spelllang = "en_us"
 -- vim.opt.spell = true
+
+vim.cmd("let &undodir=expand('~/.local/state/nvim/undodir/')")
 
 -- netrw (builtin file explorer)
 vim.g.netrw_liststyle = 3   -- tree-like display
@@ -35,13 +38,13 @@ vim.filetype.add({
 
 vim.g.mapleader = "\'"
 
-vim.keymap.set('i', '<C-h>', '<ESC>')                    --ctrl+h to escape in insert mode
+-- vim.keymap.set('i', '<C-h>', '<ESC>')                    --ctrl+h to escape in insert mode
 vim.keymap.set('n', '<C-S>', ':update<CR>')
 vim.keymap.set('n', ',', '@@')                           --, to repeat macro
-vim.keymap.set('v', ',', ':norm,<CR>')
 vim.keymap.set('n', '<C-k>', '<C-y>', {remap=true})      --ctrl+j/k to scroll up/down
 vim.keymap.set('n', '<C-j>', '<C-e>', {remap=true})
 vim.keymap.set('v', '.', ':norm.<CR>')                   --visual mode . command
+vim.keymap.set('v', ',', ':norm,<CR>')
 vim.keymap.set('n', '<leader>sv', ':source $MYVIMRC<CR>')--reload config
 
 
@@ -206,7 +209,7 @@ neotree_opts = {
 		renderers = {
 			directory = {
 				{"icon"},
-				{"name", use_git_status_colors = true, right_padding = 0},
+				{"name", use_git_status_colors = false, right_padding = 0},
 				{"trailing_slash"},
 				-- {"diagnostics"},
 				-- {"git_status"},
@@ -217,15 +220,21 @@ neotree_opts = {
 		"filesystem", -- Neotree filesystem source
 		-- "netman.ui.neo-tree",
 	},
+	--[[ filesystem = {
+		filtered_items = {
+			visible = true,     -- hidden items are shown as grey
+			hide_dotfiles = true,
+			hide_gitignored = true,
+			-- always_show = {'.gitignore', '.gitattributes'},
+		},
+	}, ]]
+	-- enable_git_status = true,
 }
 
 require("plugins")
 
--- require("NeoComposer").setup()
 
 
-
--- NOTE: version control/git stuff
 --[[ require("auto-session").setup {
 	auto_session_suppress_dirs = { "*" },
 	auto_session_allowed_dirs = { "~/Documents/*", "~/Downloads/llama/*", "~/.config/nvim/" },
@@ -236,16 +245,4 @@ vim.g.undotree_SetFocusWhenToggle = 1
 vim.g.undotree_DiffAutoOpen = 0
 vim.g.undotree_ShortIndicators = 1
 vim.g.undotree_HelpLine = 0
-vim.cmd("let &undodir=expand('~/.undodir')")
--- vim.opt.undodir = "~/.undodir"
-vim.opt.undofile = true
 
--- gitgutter
-vim.g.gitgutter_signs=1
-vim.g.gitgutter_highlight_linenrs=0
-
-vim.g.gitgutter_sign_added                   = '│'
-vim.g.gitgutter_sign_modified                = '│'
-vim.g.gitgutter_sign_removed                 = '│'
-vim.g.gitgutter_sign_removed_above_and_below = '{'
-vim.g.gitgutter_sign_modified_removed        = '│~'

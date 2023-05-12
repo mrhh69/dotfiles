@@ -182,8 +182,10 @@ return require('lazy').setup( {
 		keys = {{"<C-g>", "<cmd>Git<CR>"}},
 	},
 	-- 'rmagatti/auto-session',                   -- session managing
-	-- 'airblade/vim-gitgutter',                  -- git diff next to line numbers
 	--use 'akinsho/git-conflict.nvim'
+	{'lewis6991/gitsigns.nvim', event="VeryLazy",
+		config = function() require('gitsigns').setup() end,
+	},
 	{'cpea2506/relative-toggle.nvim', event="VeryLazy",
 		config = function() require('relative-toggle').setup() end
 	},
@@ -197,10 +199,7 @@ return require('lazy').setup( {
 
 	{'nmac427/guess-indent.nvim',               -- automatic indents
 		lazy = false,
-		config = function()
-			require('guess-indent').setup({})
-			vim.g.editorconfig = false -- disable editorconfig (default tab-setter)
-		end
+		config = function() require('guess-indent').setup({}) end,
 	},
 	{'alec-gibson/nvim-tetris', --cmd="Tetris"
 		keys = {{'<leader>Gt', '<cmd>Tetris<CR>'}},
@@ -232,7 +231,7 @@ return require('lazy').setup( {
 				"tohtml",
 				"tutor",
 				"zipPlugin",
-				"editorconfig",
+				"editorconfig", -- remove editorconfig (I use a smart plugin)
 				"rplugin",
 				"shada",
 			}
