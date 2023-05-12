@@ -30,9 +30,15 @@ vim.g.netrw_liststyle = 3   -- tree-like display
 vim.g.netrw_banner = 0
 
 vim.filetype.add({
+	filename = {
+		['kitty.conf'] = 'kitty',
+	},
 	pattern = {
 		['.*%.[sS]'] = 'asm6502',
-	}
+		['.*/kitty/.*%.conf'] = 'kitty',
+		['.*/kitty/.*%.session'] = 'kitty-session',
+	},
+
 })
 
 
@@ -231,9 +237,43 @@ neotree_opts = {
 	-- enable_git_status = true,
 }
 
-require("plugins")
 
 
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require('lazy').setup('plugins', {
+	defaults = {lazy = true},
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"gzip",
+				"matchit",
+				-- "matchparen",
+				-- "netrwPlugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+				"editorconfig", -- remove editorconfig (I use a smart plugin)
+				"rplugin",
+				"shada",
+			}
+		}
+	},
+})
+
+vim.cmd.colorscheme("onedark")
 
 --[[ require("auto-session").setup {
 	auto_session_suppress_dirs = { "*" },

@@ -1,17 +1,4 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
-return require('lazy').setup( {
+return {
 
 	-- 'kkharji/sqlite.lua',
 	-- 'ecthelionvi/NeoComposer.nvim',
@@ -23,17 +10,12 @@ return require('lazy').setup( {
 	-- 'RRethy/nvim-treesitter-textsubjects',
 	-- 'ahmedkhalf/project.nvim',
 
-	--colorscheme
 	{'navarasu/onedark.nvim',
-		lazy = false, priority = 10,
-		-- opts = ,
-		config = function()
-			require('onedark').setup(onedark_opts)
-			vim.cmd.colorscheme("onedark")
-		end
+		lazy = false,
+		opts = function() return onedark_opts end,
 	},
 
-	{'nvim-treesitter/nvim-treesitter',         -- tree-sitter for good highlighting
+	{'nvim-treesitter/nvim-treesitter',
 		lazy = false,
 		-- event="VeryLazy",
 		config = function()
@@ -53,14 +35,15 @@ return require('lazy').setup( {
 		keys = {{"<c-p>", "<cmd>TSPlaygroundToggle<CR>"}},
 	},
 	{'nvim-treesitter/nvim-treesitter-textobjects', event = "VeryLazy"},
-	{'fladson/vim-kitty', lazy=false},
+	{'mrhh69/nvim-kitty', lazy=false},
 
 	--NOTE: file navigating
 	{'nvim-telescope/telescope.nvim',         -- fuzzy finding
 		dependencies = {'nvim-lua/plenary.nvim'},
-		config = function()
-			require('telescope').setup(telescope_opts)
-			-- require('telescope').load_extension('fzf')
+		opts = function(_, opts) return telescope_opts end,
+		config = function(_, opts)
+			require('telescope').setup(opts)
+			require('telescope').load_extension('fzf')
 		end,
 		keys = {
 			{"<leader>ff", function() require'telescope.builtin'.find_files() end},
@@ -82,9 +65,8 @@ return require('lazy').setup( {
 	{'nvim-neo-tree/neo-tree.nvim',
 		keys = {{'<leader>t', '<cmd>Neotree<CR>'}},
 		dependencies = {'nvim-lua/plenary.nvim', 'MunifTanjim/nui.nvim'},
-		config = function()
-			require('neo-tree').setup(neotree_opts)
-		end,
+		main = 'neo-tree',
+		opts = function() return neotree_opts end,
 	},
 
 
@@ -127,41 +109,38 @@ return require('lazy').setup( {
 		opts = {},
 	},
 	{ "chrisgrieser/nvim-spider", event = "VeryLazy", -- better move by word
-		config = function()
-			require('spider').setup({skipInsignificantPunctuation = true})
-			vim.keymap.set({"n", "o", "x"}, "w",  "<cmd>lua require('spider').motion('w')<CR>")
-			vim.keymap.set({"n", "o", "x"}, "e",  "<cmd>lua require('spider').motion('e')<CR>")
-			vim.keymap.set({"n", "o", "x"}, "b",  "<cmd>lua require('spider').motion('b')<CR>")
-			vim.keymap.set({"n", "o", "x"}, "ge", "<cmd>lua require('spider').motion('ge')<CR>")
-		end
+		main = 'spider',
+		opts = function() return {skipInsignificantPunctuation = true} end,
+		keys = {
+			{ "w",  "<cmd>lua require('spider').motion('w')<CR>", mode={"n", "o", "x"} },
+			{ "e",  "<cmd>lua require('spider').motion('e')<CR>", mode={"n", "o", "x"} },
+			{ "b",  "<cmd>lua require('spider').motion('b')<CR>", mode={"n", "o", "x"} },
+			{ "ge", "<cmd>lua require('spider').motion('ge')<CR>",mode={"n", "o", "x"} },
+		},
 	},
-	{'asiryk/auto-hlsearch.nvim', event="VeryLazy",
-		config = function() require('auto-hlsearch').setup() end
-	},
+	{'asiryk/auto-hlsearch.nvim', event="VeryLazy", opts = {}, },
 	{'abecodes/tabout.nvim', event="VeryLazy",
-		config = function() require('tabout').setup(tabout_opts) end,
+		opts = function() return tabout_opts end,
 	},
-	{'max397574/better-escape.nvim', event="VeryLazy",
-		config = function() require("better_escape").setup {
+	{'max397574/better-escape.nvim', event="VeryLazy", main = 'better_escape',
+		opts = function() return {
 			mapping = {'jk', 'kj'},
 			keys = "<Esc>",
-		}
-		end,
+		} end,
 	},
 
 
 	--NOTE: editor nice looking stuff
-	'nvim-treesitter/nvim-treesitter-context', -- show cur function top line
-	{'lukas-reineke/indent-blankline.nvim',     -- indent guide
-		-- lazy = false,
+	-- 'nvim-treesitter/nvim-treesitter-context', -- show cur function top line
+	{'lukas-reineke/indent-blankline.nvim', main='indent_blankline',     -- indent guide
 		event="VeryLazy",
-		config = function() require("indent_blankline").setup() end,
+		opts = {},
 	},
 	{'karb94/neoscroll.nvim',                   -- better scrolling
 		event = "VeryLazy",
 		opts = {easing_function = 'sine',},
-		config = function()
-			require('neoscroll').setup({easing_function = 'sine'})
+		config = function(_, o)
+			require('neoscroll').setup(o)
 			require('neoscroll.config').set_mappings({
 				['<C-y>'] = {'scroll', {'-0.10', 'true', '100', nil}},
 				['<C-e>'] = {'scroll', { '0.10', 'true', '100', nil}},
@@ -169,7 +148,7 @@ return require('lazy').setup( {
 		end,
 	},
 	{'nvim-lualine/lualine.nvim',               -- status bar
-		lazy = false, --event = "VeryLazy",
+		lazy = false,
 		opts = lualine_opts,
 	},
 
@@ -183,12 +162,8 @@ return require('lazy').setup( {
 	},
 	-- 'rmagatti/auto-session',                   -- session managing
 	--use 'akinsho/git-conflict.nvim'
-	{'lewis6991/gitsigns.nvim', event="VeryLazy",
-		config = function() require('gitsigns').setup() end,
-	},
-	{'cpea2506/relative-toggle.nvim', event="VeryLazy",
-		config = function() require('relative-toggle').setup() end
-	},
+	{'lewis6991/gitsigns.nvim', event="VeryLazy", opts = {}, },
+	{'cpea2506/relative-toggle.nvim', event="VeryLazy", opts = {}, },
 
 
 	--misc
@@ -199,14 +174,14 @@ return require('lazy').setup( {
 
 	{'nmac427/guess-indent.nvim',               -- automatic indents
 		lazy = false,
-		config = function() require('guess-indent').setup({}) end,
+		opts = {},
 	},
 	{'alec-gibson/nvim-tetris', --cmd="Tetris"
 		keys = {{'<leader>Gt', '<cmd>Tetris<CR>'}},
 	},
 	{'jim-fx/sudoku.nvim', --cmd = "Sudoku",
 		keys = {{'<leader>Gu', '<cmd>Sudoku<CR>'}},
-		config = function() require("sudoku").setup{} end,
+		opts = {},
 	},
 	{'seandewar/nvimesweeper', --cmd="Nvimesweeper",
 		keys = {{'<leader>Gn', '<cmd>Nvimesweeper<CR>'}},
@@ -218,23 +193,4 @@ return require('lazy').setup( {
 	{'ThePrimeagen/vim-be-good', --cmd='VimBeGood',
 		keys = {{'<leader>Gv', '<cmd>VimBeGood<CR>'}},
 	},
-}, {
-	defaults = {lazy = true},
-	performance = {
-		rtp = {
-			disabled_plugins = {
-				"gzip",
-				"matchit",
-				-- "matchparen",
-				-- "netrwPlugin",
-				"tarPlugin",
-				"tohtml",
-				"tutor",
-				"zipPlugin",
-				"editorconfig", -- remove editorconfig (I use a smart plugin)
-				"rplugin",
-				"shada",
-			}
-		}
-	},
-})
+}
