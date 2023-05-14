@@ -1,5 +1,4 @@
 return {
-
 	-- 'kkharji/sqlite.lua',
 	-- 'ecthelionvi/NeoComposer.nvim',
 
@@ -12,14 +11,15 @@ return {
 
 	{'navarasu/onedark.nvim',
 		lazy = false,
-		opts = function() return onedark_opts end,
+		opts = require'config.onedark'.conf,
 	},
 
 	{'nvim-treesitter/nvim-treesitter',
 		lazy = false,
 		-- event="VeryLazy",
-		config = function()
-			require('nvim-treesitter.configs').setup(treesitter_opts)
+		opts = require'config.treesitter'.conf,
+		config = function(_, o)
+			require('nvim-treesitter.configs').setup(o)
 			require'nvim-treesitter.parsers'.get_parser_configs().asm6502 = {
 				install_info = {
 					url = "~/Documents/tree-sitter-asm6502/", -- local path or git repo
@@ -40,7 +40,7 @@ return {
 	--NOTE: file navigating
 	{'nvim-telescope/telescope.nvim',         -- fuzzy finding
 		dependencies = {'nvim-lua/plenary.nvim'},
-		opts = function(_, opts) return telescope_opts end,
+		opts = telescope_opts,
 		config = function(_, opts)
 			require('telescope').setup(opts)
 			require('telescope').load_extension('fzf')
@@ -59,14 +59,18 @@ return {
 			{ '<leader>g', "<cmd>GrapplePopup tags<CR>" },
 			{ '<leader>n', function() require'grapple'.cycle_forward() end},
 			{ '<leader>1', function() require("grapple").select({ key = "g1" }) end},
+			{ '<leader>2', function() require("grapple").select({ key = "g2" }) end},
+			{ '<leader>3', function() require("grapple").select({ key = "g3" }) end},
 			{ '<leader>j1', function() require("grapple").tag({ key = "g1" }) end},
+			{ '<leader>j2', function() require("grapple").tag({ key = "g2" }) end},
+			{ '<leader>j3', function() require("grapple").tag({ key = "g3" }) end},
 		},
 	},
 	{'nvim-neo-tree/neo-tree.nvim',
 		keys = {{'<leader>t', '<cmd>Neotree<CR>'}},
 		dependencies = {'nvim-lua/plenary.nvim', 'MunifTanjim/nui.nvim'},
 		main = 'neo-tree',
-		opts = function() return neotree_opts end,
+		opts = require'config.neotree'.conf,
 	},
 
 
@@ -110,7 +114,7 @@ return {
 	},
 	{ "chrisgrieser/nvim-spider", event = "VeryLazy", -- better move by word
 		main = 'spider',
-		opts = function() return {skipInsignificantPunctuation = true} end,
+		opts = {skipInsignificantPunctuation = true},
 		keys = {
 			{ "w",  "<cmd>lua require('spider').motion('w')<CR>", mode={"n", "o", "x"} },
 			{ "e",  "<cmd>lua require('spider').motion('e')<CR>", mode={"n", "o", "x"} },
@@ -120,13 +124,13 @@ return {
 	},
 	{'asiryk/auto-hlsearch.nvim', event="VeryLazy", opts = {}, },
 	{'abecodes/tabout.nvim', event="VeryLazy",
-		opts = function() return tabout_opts end,
+		opts = tabout_opts,
 	},
 	{'max397574/better-escape.nvim', event="VeryLazy", main = 'better_escape',
-		opts = function() return {
+		opts = {
 			mapping = {'jk', 'kj'},
 			keys = "<Esc>",
-		} end,
+		},
 	},
 
 
@@ -149,7 +153,10 @@ return {
 	},
 	{'nvim-lualine/lualine.nvim',               -- status bar
 		lazy = false,
-		opts = lualine_opts,
+		opts = require'config.lualine'.conf,
+	},
+	{'vigoux/notifier.nvim', event="VeryLazy",
+		opts = {},
 	},
 
 

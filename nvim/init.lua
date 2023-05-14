@@ -52,60 +52,8 @@ vim.keymap.set('n', '<C-j>', '<C-e>', {remap=true})
 vim.keymap.set('v', '.', ':norm.<CR>')                   --visual mode . command
 vim.keymap.set('v', ',', ':norm,<CR>')
 vim.keymap.set('n', '<leader>sv', ':source $MYVIMRC<CR>')--reload config
-
-
-onedark_opts = {
-    style = 'warmer',
-    ending_tildes = true,
-    toggle_style_key = '<c-t>',
-    toggle_style_list = {'dark', 'darker', 'cool', 'deep', 'warm', 'warmer'}, -- List of styles to toggle between
-
-    -- Change code style ---
-    code_style = {
-        comments = 'none',
-    },
-
-    -- Custom Highlights --
-    colors = {}, -- Override default colors
-    highlights = {
-		["@constructor"] = { fg = "$purple" },
-		["@operator"] = {fg = "$purple"},
-		["@variable"] = {fg = "$red"},
-		["@function.builtin"] = {fg = "$blue"},
-		["GitGutterChange"] = {fg = "$yellow"},
-		["GitSignsChange"] = {fg = "$yellow"},
-		["GitSignsChangeLN"] = {fg = "$yellow"},
-		["GitSignsChangeNR"] = {fg = "$yellow"},
-		["UndotreeNode"] = {fg = "$purple"},
-		["@text.note"] = {fg = "$cyan"},
-		["@text.todo"] = {fg = "$purple"},
-		["@text.title"] = {fg = "$blue"},
-		["@tag.attribute"] = {fg = "$red"},
-		["@text.strong"] = {fg = "$purple"},
-		["@string.regex"] = {fg = "$purple"},
-		-- ["MatchParen"] = {fg = "$cyan", bg="$none", fmt="underline"},
-		["NeoTreeNormal"] = {bg = "$bg0"},
-		["NeoTreeNormalNC"] = {bg = "$bg0"},
-		["NeoTreeEndOfBuffer"] = {fg = "$bg2", bg = "$bg0"},
-		["NeotreeFileSlash"] = {fg = "$red"},
-		["NeoTreeRootName"] = {fg = "$purple"},
-	},
-
-    -- Plugins Config --
-    diagnostics = {
-        darker = true, -- darker colors for diagnostic
-        undercurl = true,   -- use undercurl instead of underline for diagnostics
-        background = true,    -- use background color for virtual text
-    },
-}
-
-treesitter_opts = {
-	ensure_installed = {'c', 'lua', 'vim', 'vimdoc', 'javascript', 'html', 'css', 'comment', 'markdown', 'markdown_inline', 'json', 'make', 'bash'},
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = false,
-	},
-}
+--[[ vim.keymap.set('n', 'u', 'u<c-o>')        -- no jump on undo
+vim.keymap.set('n', '<c-r>', '<c-r><c-o>') ]]
 
 telescope_opts = {
 	defaults = {
@@ -115,42 +63,6 @@ telescope_opts = {
 		fzf = {
 			fuzzy = true, -- false will only do exact matching
 		}
-	},
-}
-
-local indent = {
-    function()
-        local style = vim.bo.expandtab and "sp" or "tb"
-        local size = vim.bo.expandtab and vim.bo.tabstop or vim.bo.shiftwidth
-        return style .. ":" .. size
-    end,
-}
--- tabline
-lualine_opts = {
-	options = {
-		icons_enabled = false,
-		component_separators = { left = '|', right = '|'},
-		section_separators   = { left = '', right = ''},
-		globalstatus = true, -- same statusline for each window
-	},
-	sections = {
-		lualine_a = {'mode'},
-		lualine_b = {
-			'branch', 'diff', 'diagnostics',
-			-- {require('auto-session-library').current_session_name},
-			{
-				function()
-					local key = require("grapple").key()
-					return " [" .. key .. "]"
-				end,
-				cond = function() return require("grapple").exists() end,
-			},
-		},
-		lualine_c = {'filename'},
-
-		lualine_x = {indent, 'filetype'},
-		lualine_y = {'progress'},
-		lualine_z = {'location'}
 	},
 }
 
@@ -190,51 +102,6 @@ tabout_opts = {
 		{open = '{', close = '}'}
 	},
 	ignore_beginning = false, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
-}
-
-
-neotree_opts = {
-	window = {position = "current"},
-	default_component_configs = {
-		icon = {
-			folder_closed = '▸',
-			folder_open = '▾',
-			folder_empty = '▾',
-			default = '',
-		},
-	},
-	filesystem = {
-		components = {
-			trailing_slash = function ()
-				return {
-					text = "/",
-					highlight = "NeotreeFileSlash",
-				}
-			end,
-		},
-		renderers = {
-			directory = {
-				{"icon"},
-				{"name", use_git_status_colors = false, right_padding = 0},
-				{"trailing_slash"},
-				-- {"diagnostics"},
-				-- {"git_status"},
-			},
-		}
-	},
-	sources = {
-		"filesystem", -- Neotree filesystem source
-		-- "netman.ui.neo-tree",
-	},
-	--[[ filesystem = {
-		filtered_items = {
-			visible = true,     -- hidden items are shown as grey
-			hide_dotfiles = true,
-			hide_gitignored = true,
-			-- always_show = {'.gitignore', '.gitattributes'},
-		},
-	}, ]]
-	-- enable_git_status = true,
 }
 
 
