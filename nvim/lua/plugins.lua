@@ -40,6 +40,7 @@ return require('lazy').setup( {
 		end,
 	},
 	{'nvim-treesitter/nvim-treesitter-textobjects', event = "VeryLazy"},
+	{'vim-scripts/openvpn', lazy = false},
 
 	--NOTE: file navigating
 	{'nvim-telescope/telescope.nvim',         -- fuzzy finding
