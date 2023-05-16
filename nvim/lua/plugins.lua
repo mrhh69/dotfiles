@@ -30,6 +30,18 @@ return {
 			vim.opt.foldmethod = "expr"
 			vim.opt.foldexpr   = "nvim_treesitter#foldexpr()"
 		end,
+		dependencies = {
+			-- this is wierd... fix this?
+			-- If I make this load on verylazy, then it doesn't work in javascript?
+			{'andymass/vim-matchup', config = function()
+				vim.g.matchup_text_obj_enabled = 0
+				vim.g.matchup_delim_noskips = 2 -- no matchup inside comments
+				-- highlight inside
+				--[[ vim.g.matchup_matchparen_deferred = 1
+				vim.g.matchup_matchparen_hi_surround_always = 1 ]]
+			end},
+			{'windwp/nvim-ts-autotag'},
+		},
 	},
 	{'nvim-treesitter/playground',
 		keys = {{"<c-p>", "<cmd>TSPlaygroundToggle<CR>"}},
