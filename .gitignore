@@ -2,6 +2,7 @@
 # ignore all other config files
 .*
 */
+*
 
 # except ones I am actually tracking
 # also allow all subdirs
