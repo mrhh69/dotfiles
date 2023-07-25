@@ -1,0 +1,33 @@
+# Fixed spacing (no ligatures)
+# ----------------------------
+[buildPlans.iosevka-custom]
+family = "Iosevka Custom"
+spacing = "fixed"
+serifs = "sans"
+export-glyph-names = false
+
+[buildPlans.iosevka-custom.variants]
+inherits = "ss05"
+
+[buildPlans.iosevka-custom.variants.design]
+zero = 'slashed'
+asterisk = 'hex-low'
+ampersand = 'closed'
+at = 'fourfold'
+
+[buildPlans.iosevka-custom.slopes.upright]
+angle = 0
+shape = "upright"
+menu  = "upright"
+css   = "normal"
+
+[buildPlans.iosevka-custom.slopes.italic]
+angle = 9.4
+shape = "italic"
+menu  = "italic"
+css   = "italic"
+
+[buildPlans.iosevka-custom.widths.normal]
+shape = 600
+menu  = 5
+css   = "normal"
