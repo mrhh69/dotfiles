@@ -1,8 +1,8 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: FontAwesome, sans-serif;
+    font-family: FontAwesome, Iosevka Custom Heavy;
     font-size: 13px;
-    /* looks good for letters, bad for icons: find out way to have best of both worlds? */
+    /* looks good for letters, bad for icons */
     /* font-weight: bold; */
 }
 
