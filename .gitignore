@@ -19,4 +19,6 @@
 !neofetch/**
 !foot/
 !foot/**
+!waybar/
+!waybar/**
 !iosevka-build-plans.toml
