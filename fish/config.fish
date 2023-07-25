@@ -1,6 +1,7 @@
 status -l ; and test -f /etc/profile.env ; and source /etc/profile.env
 if status is-interactive
 #	fish_add_path "EXAMPLE PATH"
+	fish_add_path "~/.cargo/bin/"
 
 
 	set fish_color_host green
