@@ -14,6 +14,11 @@ zero = 'slashed'
 asterisk = 'hex-low'
 ampersand = 'closed'
 at = 'fourfold'
+paren = 'large-contour'
+a = 'single-storey-tailed'
+g = 'single-storey-serifless'
+r = 'hookless-serifed'
+four = 'closed'
 
 [buildPlans.iosevka-custom.slopes.upright]
 angle = 0
