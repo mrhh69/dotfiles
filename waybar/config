@@ -9,53 +9,39 @@
     "modules-right": ["bluetooth", "network", "cpu", "memory", "upower"],
 
 
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
     "clock": {
         //"tooltip-format": "<tt><small>{calendar}</small></tt>",
-        // figure out how to do dotw
-        "format-alt": "{:%d %B}"
+        "format": "{:%H󰣨%M}",
+        "format-alt": "{:%a, %d %B}"
     },
     "cpu": {
+        "interval": 2,
         "format": "{usage}% ",
         "tooltip": false
     },
     "memory": {
+        "interval": 2,
         "format": "{}% "
     },
     "network": {
-        //"interface": "wlp1s0f0", // (Optional) To force the use of this interface
-        //"format-wifi": "{essid} {signalStrength}% ",
-        "format-wifi": "{signalStrength}% ",
+        "format-wifi": "",
         "format-ethernet": "󰈀",
-        "tooltip-format": "{essid}",
-        "format-linked": "(No IP)",
-        "format-disconnected": "Disconnected ⚠",
+        "tooltip-format": "{essid} {signalStrength}%",
+        "format-linked": "",
+        "format-disconnected": "⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
-    },
-    "pulseaudio": {
-        "scroll-step": 0, // %, can be a float
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon} ",
-        "format-bluetooth-muted": " {icon} ",
-        "format-muted": " ",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "default": ["", "", ""]
-        },
-        //"on-click": "pavucontrol"
     },
     "wlr/workspaces": {
         // why isn't this on by default ???
         "sort-by-number": true
-    }
+    },
+    "bluetooth": {
+        "format-disabled": "󰂲",
+        "format-off": "󰂲",
+        "format-on": "󰂳",
+        "format-connected": "󰂱",
+        "tooltip-format": "{status}",
+    },
 }
 
 

@@ -58,7 +58,8 @@ button:hover {
 #network,
 #pulseaudio,
 #wireplumber,
-#idle_inhibitor
+#idle_inhibitor,
+#bluetooth
 {
     padding: 0 10px;
     color: @text;
