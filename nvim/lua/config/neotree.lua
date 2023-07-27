@@ -3,10 +3,29 @@ return {conf = function()
 		window = {position = "current"},
 		default_component_configs = {
 			icon = {
-				folder_closed = '▸',
-				folder_open = '▾',
-				folder_empty = '▾',
+				-- folder_closed = '▸',
+				-- folder_open = '▾',
+				-- folder_empty = '▾',
+				folder_closed = '⯈',
+				folder_open = '⯆',
+				folder_empty = '⯆',
 				default = '',
+			},
+			git_status = {
+				symbols = {
+					-- Change type
+					added     = "✚",
+					deleted   = "✖",
+					-- modified  = "󰃉",
+					modified  = "",
+					renamed   = "󰁕",
+					-- Status type
+					untracked = "",
+					ignored   = "",
+					unstaged  = "",
+					staged    = "",
+					conflict  = "",
+				},
 			},
 		},
 		filesystem = {
