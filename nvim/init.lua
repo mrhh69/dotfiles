@@ -1,4 +1,14 @@
 
+vim.o.guifont = "Iosevka Custom Standard, Symbols Nerd Font Mono, Symbola:h12"
+vim.g.neovide_confirm_quit = false
+vim.g.neovide_scroll_animation_length = 0.3
+vim.g.neovide_hide_mouse_when_typing = true
+vim.g.neovide_cursor_animate_command_line = false
+vim.g.neovide_cursor_animate_in_insert_mode = true
+vim.g.neovide_floating_blur_amount_x = 2.0
+vim.g.neovide_floating_blur_amount_y = 2.0
+
+
 vim.opt.number=true             -- show linenumbers
 vim.opt.relativenumber = true   -- relative by default (no flickering)
 vim.opt.showmode = false		-- do not show default statusline (insert/visual)
@@ -52,6 +62,7 @@ vim.keymap.set('n', '<C-j>', '<C-e>', {remap=true})
 vim.keymap.set('v', '.', ':norm.<CR>')                   --visual mode . command
 vim.keymap.set('v', ',', ':norm,<CR>')
 vim.keymap.set('n', '<leader>sv', ':source $MYVIMRC<CR>')--reload config
+-- vim.keymap.set('n', 'q:', '<nop>')  -- disable this annoying thing: history can just be opened with :<c-f>
 --[[ vim.keymap.set('n', 'u', 'u<c-o>')        -- no jump on undo
 vim.keymap.set('n', '<c-r>', '<c-r><c-o>') ]]
 
