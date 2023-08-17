@@ -1,15 +1,15 @@
-# Fixed spacing (no ligatures)
-# ----------------------------
-[buildPlans.iosevka-custom]
-family = "Iosevka Custom"
+
+# Fixed version
+[buildPlans.iosevka-custom-fixed]
+family = "Iosevka Custom Fixed"
 spacing = "fixed"
 serifs = "sans"
 export-glyph-names = false
 
-[buildPlans.iosevka-custom.variants]
+[buildPlans.iosevka-custom-fixed.variants]
 inherits = "ss05"
 
-[buildPlans.iosevka-custom.variants.design]
+[buildPlans.iosevka-custom-fixed.variants.design]
 zero = 'slashed'
 asterisk = 'hex-low'
 ampersand = 'closed'
@@ -20,19 +20,50 @@ g = 'single-storey-serifless'
 r = 'hookless-serifed'
 four = 'closed'
 
-[buildPlans.iosevka-custom.slopes.upright]
-angle = 0
-shape = "upright"
-menu  = "upright"
-css   = "normal"
-
-[buildPlans.iosevka-custom.slopes.italic]
-angle = 9.4
-shape = "italic"
-menu  = "italic"
-css   = "italic"
-
-[buildPlans.iosevka-custom.widths.normal]
+[buildPlans.iosevka-custom-fixed.widths.normal]
 shape = 600
 menu  = 5
 css   = "normal"
+
+# only build normal and italic
+[buildPlans.iosevka-custom-fixed.slopes.normal]
+angle = 0
+shape = "upright"
+menu = "upright"
+css = "normal"
+[buildPlans.iosevka-custom-fixed.slopes.italic]
+angle = 9.4
+shape = "italic"
+menu = "italic"
+css = "italic"
+
+
+# Ligature Version
+[buildPlans.iosevka-custom-standard]
+family = "Iosevka Custom Standard"
+spacing = "fontconfig-mono"
+serifs = "sans"
+export-glyph-names = false
+
+[buildPlans.iosevka-custom-standard.ligatures]
+inherits = "default-calt"
+
+[buildPlans.iosevka-custom-standard.variants]
+inherits = "buildPlans.iosevka-custom-fixed"
+
+[buildPlans.iosevka-custom-standard.widths.normal]
+shape = 600
+menu  = 5
+css = "normal"
+
+# only build normal and italic
+[buildPlans.iosevka-custom-standard.slopes.normal]
+angle = 0
+shape = "upright"
+menu = "upright"
+css = "normal"
+[buildPlans.iosevka-custom-standard.slopes.italic]
+angle = 9.4
+shape = "italic"
+menu = "italic"
+css = "italic"
