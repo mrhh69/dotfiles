@@ -152,7 +152,7 @@ return {
 		event="VeryLazy",
 		opts = {},
 	},
-	{'karb94/neoscroll.nvim',                   -- better scrolling
+	--[[ {'karb94/neoscroll.nvim',                   -- better scrolling
 		event = "VeryLazy",
 		opts = {easing_function = 'sine',},
 		config = function(_, o)
@@ -162,7 +162,7 @@ return {
 				['<C-e>'] = {'scroll', { '0.10', 'true', '100', nil}},
 			})
 		end,
-	},
+	}, ]]
 	{'nvim-lualine/lualine.nvim',               -- status bar
 		lazy = false,
 		opts = require'config.lualine'.conf,
