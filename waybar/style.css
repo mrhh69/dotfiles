@@ -81,21 +81,9 @@ label:focus {
     background-color: #000000;
 }
 
-#network {
-    color: @blue;
-}
-#network.disconnected {
-    color: @red;
-}
-#upower {
-    color: @yellow;
-}
-#memory {
-    color: @mauve;
-}
-#cpu {
-    color: @green;
-}
-#bluetooth {
-    color: @sky;
-}
+#network              { color: @blue; }
+#network.disconnected { color: @red; }
+#upower               { color: @yellow; }
+#memory               { color: @mauve; }
+#cpu                  { color: @green; }
+#bluetooth            { color: @sky; }
