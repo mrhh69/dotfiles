@@ -7,6 +7,8 @@ if status is-interactive
 	set fish_color_host green
 	set fish_color_user green
 	set fish_color_cwd blue
+
+	export GPG_TTY=$(tty)
 end
 
 
