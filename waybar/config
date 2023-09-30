@@ -33,7 +33,9 @@
     },
     "wlr/workspaces": {
         // why isn't this on by default ???
-        "sort-by-number": true
+        "sort-by-number": true,
+        // AGAIN WHY ISN'T THIS DEFAULT?????
+        "on-click": "activate"
     },
     "bluetooth": {
         "format-disabled": "󰂲",
