@@ -43,6 +43,24 @@ return {
 			{'windwp/nvim-ts-autotag'},
 		},
 	},
+	-- LSP
+	{'VonHeikemen/lsp-zero.nvim', branch = 'v3.x', lazy = false,
+		config = function(_, o)
+			local lsp_zero = require('lsp-zero')
+
+			lsp_zero.on_attach(function(client, bufnr)
+				-- see :help lsp-zero-keybindings
+				-- to learn the available actions
+				lsp_zero.default_keymaps({buffer = bufnr})
+			end)
+			lsp_zero.setup_servers({"rust_analyzer"})
+		end,
+	},
+	{'neovim/nvim-lspconfig'},
+	{'hrsh7th/cmp-nvim-lsp'},
+	{'hrsh7th/nvim-cmp'},
+	{'L3MON4D3/LuaSnip'},
+
 	{'nvim-treesitter/playground',
 		keys = {{"<c-p>", "<cmd>TSPlaygroundToggle<CR>"}},
 	},
