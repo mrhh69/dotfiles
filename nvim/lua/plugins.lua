@@ -52,6 +52,7 @@ return {
 				-- see :help lsp-zero-keybindings
 				-- to learn the available actions
 				lsp_zero.default_keymaps({buffer = bufnr})
+				client.server_capabilities.semanticTokensProvider = nil
 			end)
 			lsp_zero.setup_servers({"rust_analyzer"})
 		end,
@@ -166,7 +167,7 @@ return {
 
 	--NOTE: editor nice looking stuff
 	-- 'nvim-treesitter/nvim-treesitter-context', -- show cur function top line
-	{'lukas-reineke/indent-blankline.nvim', main='indent_blankline',     -- indent guide
+	{'lukas-reineke/indent-blankline.nvim', main='ibl',     -- indent guide
 		event="VeryLazy",
 		opts = {},
 	},
