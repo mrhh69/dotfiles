@@ -169,7 +169,7 @@ return {
 	-- 'nvim-treesitter/nvim-treesitter-context', -- show cur function top line
 	{'lukas-reineke/indent-blankline.nvim', main='ibl',     -- indent guide
 		event="VeryLazy",
-		opts = {},
+		opts = {scope = {enabled = false}},
 	},
 	--[[ {'karb94/neoscroll.nvim',                   -- better scrolling
 		event = "VeryLazy",
